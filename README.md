@@ -1,8 +1,15 @@
 # Jenkins-master Docker container
 
-This project builds a jenkins-master docker image to use for continuous integration projects.
+This project builds a jenkins-master docker image and a persistent storage container to use for continuous integration projects.
 
+# Deploy
 
+Run the following to deploy Jenkins after building both the master and data images.
+
+```
+docker run --name=jenkins-data jenkins-data
+docker run -p 8080:8080 -p 50000:50000 --name=jenkins-master --volumes-from=jenkins-data -d jenkins-master
+```
 
 # Test
 
@@ -14,8 +21,6 @@ docker run jenkins-test
 Total Duration: 0.744s
 Count: 43, Failed: 0, Skipped: 0
 ```
-
-
 
 # Workflow
 
@@ -88,5 +93,9 @@ Edit will launch a docker container, install goss, and drop the user into an int
 **Example:**
 
 `dgoss edit -e JENKINS_OPTS="--httpPort=8080 --httpsPort=-1" -e JAVA_OPTS="-Xmx1048m" jenkins:alpine`
+
+
+
+# Build status
 
 [![Build Status](https://semaphoreci.com/api/v1/2ffs2nns/jenkinsci/branches/master/badge.svg)](https://semaphoreci.com/2ffs2nns/jenkinsci)
