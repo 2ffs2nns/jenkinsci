@@ -88,3 +88,5 @@ Edit will launch a docker container, install goss, and drop the user into an int
 **Example:**
 
 `dgoss edit -e JENKINS_OPTS="--httpPort=8080 --httpsPort=-1" -e JAVA_OPTS="-Xmx1048m" jenkins:alpine`
+
+[![Build Status](https://semaphoreci.com/api/v1/2ffs2nns/jenkinsci/branches/master/badge.svg)](https://semaphoreci.com/2ffs2nns/jenkinsci)
