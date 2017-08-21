@@ -1,0 +1,11 @@
+FROM jenkins-master
+
+USER root
+RUN curl -fsSL https://goss.rocks/install | sh
+
+RUN mkdir /opt/test
+WORKDIR /opt/test
+
+COPY test/goss.yaml /opt/test
+
+CMD ["goss", "validate"]

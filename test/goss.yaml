@@ -1,0 +1,78 @@
+file:
+  /usr/local/bin/install-plugins.sh:
+    exists: true
+    mode: "0775"
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /usr/share/jenkins/jenkins.war:
+    exists: true
+    mode: "0644"
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /var/jenkins_home:
+    exists: true
+    mode: "0755"
+    owner: jenkins
+    group: jenkins
+    filetype: directory
+    contains: []
+  /var/jenkins_home/plugins.txt:
+    exists: true
+    mode: "0644"
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /var/jenkins_home/plugins/jclouds-jenkins.jpi:
+    exists: true
+    mode: "0644"
+    owner: root
+    group: root
+    filetype: file
+    contains: []
+  /var/log/jenkins:
+    exists: true
+    mode: "0755"
+    owner: jenkins
+    group: jenkins
+    filetype: directory
+    contains: []
+user:
+  jenkins:
+    exists: true
+    uid: 1000
+    gid: 1000
+    groups:
+    - jenkins
+    home: /var/jenkins_home
+    shell: /bin/bash
+command:
+  /usr/local/bin/jenkins.sh --version:
+    exit-status: 0
+    stdout:
+    - "2.74"
+    stderr: []
+    timeout: 10000
+  env:
+    exit-status: 0
+    stdout:
+    - JENKINS_HOME=/var/jenkins_home
+    - JENKINS_UC=https://updates.jenkins.io
+    - JENKINS_VERSION=2.74
+    - JAVA_OPTS=-Xmx4192m
+    - JENKINS_OPTS=--logfile=/var/log/jenkins/jenkins.log
+    stderr: []
+    timeout: 10000
+  java -version:
+    exit-status: 0
+    stdout: []
+    stderr:
+    - openjdk version "1.8.0_141"
+    timeout: 10000
+process:
+  tini:
+    running: true
